@@ -1,7 +1,5 @@
 # spring-boot-csv-download-from-rest-api
 
-# SIRENE-JAVA-PROJECT
-
 # Technologies
 - Java 8
 - Spring Boot 2 (with Spring Web MVC)
