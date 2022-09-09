@@ -6,12 +6,14 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class EtablissementDto implements Serializable {
 
 	@JsonProperty("id")
@@ -26,6 +28,6 @@ public class EtablissementDto implements Serializable {
 	private Date dateCreation;
 
 	@JsonProperty("unite_legale")
-	private UniteLegale uniteLegale;
+	private UniteLegaleDto uniteLegale;
 
 }
