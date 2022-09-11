@@ -1,5 +1,16 @@
-# Spring Boot "Microservice" Siret Project
+# Spring Boot "Microservice" Sirene Project
 This is a sample Java / Maven / Spring Boot (2.1.2.RELEASE) application that can be used as a starter for creating a microservice complete with built-in health check.
+
+# Technologies 
+- Java 8
+- Spring Boot 2.1.2.RELEASE
+- Spring Boot devtools
+- Swagger
+- Lombok
+- Maven 3.6.1
+- Apache Commons CSV 1.8
+- JUnit for unit tests
+- Deployement (Container): DOCKER
 
 # How to Run
 This application is packaged as a jar which has Tomcat 8 embedded. No Tomcat or JBoss installation is necessary. You run it using the java -jar command.
@@ -13,7 +24,7 @@ You can build the project and run the tests by running mvn clean package
 2022-09-11 14:30:15.018  INFO 7244 --- [  restartedMain] com.example.sirene.SireneApplication     : Started SireneApplication in 4.683 seconds (JVM running for 6.315)
 
 # About the Service
-Each call of the bellow service, the data retuned will be inserted in a csv file called etablissement.csv wich will stored in a folder called : data-csv. 
+Each call of the bellow service, the data retuned will be inserted in a csv file called etablissement.csv wich will be stored in a folder called : data-csv. 
 
 - https://entreprise.data.gouv.fr/api/sirene/v3/etablissements/<VOTRE_SIRET>
 
@@ -25,6 +36,7 @@ Get information about compagnie by SIRET NUMBER and save data into a csv file .
 http://localhost:8080/compagnies/addCompagnieToCsv/31302979500017
 
  Response body
+ 
 {
   "nic": "00017",
   "id": "484232781",
@@ -35,6 +47,8 @@ http://localhost:8080/compagnies/addCompagnieToCsv/31302979500017
     "numero_tva_intra": "FR96313029795"
   }
 }
+
+
  Response headers
  content-type: application/json;charset=UTF-8 
  date: Sun, 11 Sep 2022 15:59:08 GMT 
@@ -48,23 +62,16 @@ Spring Boot is an "opinionated" application bootstrapping framework that makes i
 # Deployment
 - This project will be deployed in a docker container
 - The structure of the dockerfile used in project is : 
-FROM openjdk:8-jdk-alpine
-RUN mkdir app	
-RUN mkdir /app/data-csv
-RUN mkdir /app/etc
-COPY ./src/main/resources/application.properties /app/etc/	
-ARG JAR_FILE
-ADD /target/${JAR_FILE} /app/sirene-project.jar
-WORKDIR /app
-ENTRYPOINT java -jar sirene-project.jar
-EXPOSE 8080/tcp
+
+![image](https://user-images.githubusercontent.com/46845172/189537984-1edf2efe-dd70-49f6-803a-9354af66129a.png)
+
 
 # Build my image
 - docker build -t sirene-project .
 
 # Run image in docker container
 - docker run -p 9090:8080  sirene-project:1.0
-By default, the application will run using port 8080. Instead of running it in this port, we have the possibility to specify and work with any unused port. (ex. 9090)
+- By default, the application will run using port 8080. Instead of running it in this port, we have the possibility to specify and work with any unused port. (ex. 9090)
 
 # Test my microservice
 - Once you send a REQUEST, the csv file will be generated in the folder data-csv as specified in dockerfile
